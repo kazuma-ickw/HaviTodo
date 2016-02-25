@@ -2,8 +2,10 @@ package com.example.ichikawakazuma.havitodo
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.design.widget.TabLayout.*
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarActivity
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -12,22 +14,23 @@ import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TextView
 
-class MainActivity : ActionBarActivity() {
+class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val todoPagerAdapter: TodoPagerAdapter = TodoPagerAdapter(supportFragmentManager)
+        val tabLayout: TabLayout = findViewById(R.id.main_tab) as TabLayout
         val viewPager: ViewPager = findViewById(R.id.view_pager) as ViewPager
+        val todoPagerAdapter: TodoPagerAdapter = TodoPagerAdapter(supportFragmentManager)
         viewPager.adapter = todoPagerAdapter
 
-        val tabLayout: TabLayout = findViewById(R.id.main_tab) as TabLayout
         tabLayout.setupWithViewPager(viewPager)
-//        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         tabLayout.addTab(tabLayout.newTab().setText("Habit"), 0)
         tabLayout.addTab(tabLayout.newTab().setText("Daily"), 1, true)
         tabLayout.addTab(tabLayout.newTab().setText("Config"), 2)
+        tabLayout.tabMode = MODE_SCROLLABLE
+        tabLayout.tabGravity = GRAVITY_CENTER
         Log.d("test2", "test2")
     }
 

@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 
 /**
  * Created by ichikawakazuma on 2016/02/25.
@@ -24,7 +26,10 @@ class TodoFragment() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val layout: LinearLayout = inflater?.inflate(R.layout.todoview, null) as LinearLayout
+        val layout: View = inflater?.inflate(R.layout.todoview, container, false) as View
+
+        val textView: TextView = layout?.findViewById(R.id.list_title) as TextView
+        textView.text = "test"
 
         return layout
 //        return super.onCreateView(inflater, container, savedInstanceState)

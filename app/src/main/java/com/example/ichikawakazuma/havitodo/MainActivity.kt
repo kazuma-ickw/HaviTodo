@@ -2,7 +2,9 @@ package com.example.ichikawakazuma.havitodo
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,12 +18,17 @@ class MainActivity : ActionBarActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tabLayout: TabLayout = findViewById(R.id.main_tab) as TabLayout
-//        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
-        tabLayout.addTab(tabLayout.newTab().setText("Habit"))
-        tabLayout.addTab(tabLayout.newTab().setText("Daily"))
-        tabLayout.addTab(tabLayout.newTab().setText("Config"))
+        val todoPagerAdapter: TodoPagerAdapter = TodoPagerAdapter(supportFragmentManager)
+        val viewPager: ViewPager = findViewById(R.id.view_pager) as ViewPager
+        viewPager.adapter = todoPagerAdapter
 
+        val tabLayout: TabLayout = findViewById(R.id.main_tab) as TabLayout
+        tabLayout.setupWithViewPager(viewPager)
+//        tabLayout.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout.addTab(tabLayout.newTab().setText("Habit"), 0)
+        tabLayout.addTab(tabLayout.newTab().setText("Daily"), 1, true)
+        tabLayout.addTab(tabLayout.newTab().setText("Config"), 2)
+        Log.d("test2", "test2")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

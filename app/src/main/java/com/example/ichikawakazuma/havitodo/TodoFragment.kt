@@ -16,10 +16,12 @@ import android.widget.TextView
 
 class TodoFragment() : Fragment() {
 
+    var sectionNumber: Int = 0
+
     companion object {
         fun newInstance(sectionNumber: Int): TodoFragment {
-            Log.d("test", "test")
             val todoFragment: TodoFragment = TodoFragment()
+            todoFragment.sectionNumber = sectionNumber
             return todoFragment
         }
     }
@@ -29,9 +31,8 @@ class TodoFragment() : Fragment() {
         val layout: View = inflater?.inflate(R.layout.todoview, container, false) as View
 
         val textView: TextView = layout?.findViewById(R.id.list_title) as TextView
-        textView.text = "test"
+        textView.text = "test" + sectionNumber.toString()
 
         return layout
-//        return super.onCreateView(inflater, container, savedInstanceState)
     }
 }

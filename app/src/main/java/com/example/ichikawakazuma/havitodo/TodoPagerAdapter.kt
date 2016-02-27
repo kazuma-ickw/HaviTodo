@@ -21,4 +21,13 @@ class TodoPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
 //        throw UnsupportedOperationException()
         return 3
     }
+
+    override fun getPageTitle(position: Int) : CharSequence {
+        return when(position) {
+            0 -> "Habit"
+            1 -> "Daily"
+            2 -> "Config"
+            else -> "unknown"
+        }
+    }
 }

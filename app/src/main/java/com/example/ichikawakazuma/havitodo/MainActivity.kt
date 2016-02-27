@@ -24,14 +24,9 @@ class MainActivity : AppCompatActivity(){
         val viewPager: ViewPager = findViewById(R.id.view_pager) as ViewPager
         val todoPagerAdapter: TodoPagerAdapter = TodoPagerAdapter(supportFragmentManager)
         viewPager.adapter = todoPagerAdapter
+        viewPager.currentItem = 1
 
         tabLayout.setupWithViewPager(viewPager)
-        tabLayout.addTab(tabLayout.newTab().setText("Habit"), 0)
-        tabLayout.addTab(tabLayout.newTab().setText("Daily"), 1, true)
-        tabLayout.addTab(tabLayout.newTab().setText("Config"), 2)
-        tabLayout.tabMode = MODE_SCROLLABLE
-        tabLayout.tabGravity = GRAVITY_CENTER
-        Log.d("test2", "test2")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -28,10 +28,26 @@ class TodoFragment() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val layout: View = inflater?.inflate(R.layout.todoview, container, false) as View
+        val layout: ViewGroup = inflater?.inflate(R.layout.pager_view, container, false) as ViewGroup
 
         val textView: TextView = layout?.findViewById(R.id.list_title) as TextView
         textView.text = "test" + sectionNumber.toString()
+
+        Log.d("id", R.id.list_title.toString())
+        var todoViewId: Int = R.id.list_title
+
+        for (i in 1..sectionNumber) {
+            Log.d("loop", i.toString())
+            var testView: View = inflater?.inflate(R.layout.todo_view, container, false) as View
+            var testTextView: TextView = testView?.findViewById(R.id.test_title) as TextView
+            testTextView.text = "testだよ" + i.toString()
+            var testLayoutParams: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            Log.d("generatedId", todoViewId.toString())
+            testLayoutParams.addRule(RelativeLayout.BELOW, todoViewId)
+            todoViewId = View.generateViewId()
+            testView.id = todoViewId
+            layout.addView(testView, testLayoutParams)
+        }
 
         return layout
     }

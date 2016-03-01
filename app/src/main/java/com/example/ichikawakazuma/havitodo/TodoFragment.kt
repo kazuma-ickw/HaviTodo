@@ -39,23 +39,24 @@ class TodoFragment() : Fragment() {
         Log.d("id", R.id.list_title.toString())
         var todoViewId: Int = R.id.list_title
 
-        var array: ArrayList<String> = arrayListOf("test", "rest", "guest")
+        var array: ArrayList<String> = arrayListOf("test")
+
+        var views: ArrayList<ViewGroup> = ArrayList<ViewGroup>()
 
         for (i in 1..sectionNumber) {
             Log.d("loop", i.toString())
-            var todoView: View = inflater?.inflate(R.layout.todo_view, container, false) as View
-            var testTextView: TextView = todoView?.findViewById(R.id.test_title) as TextView
-            var recyclerView: RecyclerView = todoView?.findViewById(R.id.recyclerview) as RecyclerView
+            views.add(i - 1, inflater?.inflate(R.layout.todo_view, container, false) as ViewGroup)
+            var testTextView: TextView = views.get(i - 1)?.findViewById(R.id.test_title) as TextView
+            var recyclerView: RecyclerView = views.get(i - 1)?.findViewById(R.id.recyclerview) as RecyclerView
             var layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(container?.context)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = TodoRecyclerViewAdapter(array)
             testTextView.text = "testだよ" + i.toString()
-            var testLayoutParams: RelativeLayout.LayoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+            var testLayoutParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
             Log.d("generatedId", todoViewId.toString())
-            testLayoutParams.addRule(RelativeLayout.BELOW, todoViewId)
             todoViewId = View.generateViewId()
-            todoView.id = todoViewId
-            layout.addView(todoView, testLayoutParams)
+            views.get(i - 1).id = todoViewId
+            layout.addView(views.get(i - 1), testLayoutParams)
         }
 
         return layout
